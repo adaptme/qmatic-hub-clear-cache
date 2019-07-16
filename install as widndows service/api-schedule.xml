@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service>
+    <id>api-schedule</id>
+    <name>HUB-Clear-schedule</name>
+    <description>api-schedule Windows Service</description>
+    <executable>java</executable>
+    <arguments>-jar "api-schedule.jar"</arguments>
+    <logmode>rotate</logmode>
+</service>
