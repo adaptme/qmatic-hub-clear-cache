@@ -1,7 +1,15 @@
 package com.adapt.workers;
 
 import com.adapt.http.OkhttpUnsafe;
-
+/**
+ * 2019 Adapt Middle East LLC. Dubai UAE.
+ * 
+ * @author Akhil Jayakumar
+ * @version 1.0
+ * @since 2019-07-17
+ * 
+ *        Executing Login,Clear and reboot thread.
+ */
 public class HubThreadsOrchestration extends Thread {
 	private String hubIp;
 	private boolean rebootEnnabled;
