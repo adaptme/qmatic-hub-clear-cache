@@ -2,13 +2,12 @@ package com.adapt.workers;
 
 import java.io.IOException;
 
-import com.adapt.rest.DELETECall;
-import com.adapt.rest.OkhttpUnsafe;
+import com.adapt.http.RebootQmaticHub;
 
-public class CachClearWorker extends Thread {
+public class RebootThread extends Thread {
 	private String URL;
 
-	public CachClearWorker(String URL,String threadName) {
+	public RebootThread(String URL,String threadName) {
 		// TODO Auto-generated constructor stub
 		this.URL = URL;
 		this.setName(threadName);
@@ -17,11 +16,12 @@ public class CachClearWorker extends Thread {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		DELETECall clear = new DELETECall();
-		clear.setHubName(getName());
-		clear.setURL(URL + "&" + OkhttpUnsafe.getCookie());
 		try {
-			clear.execute();
+			RebootQmaticHub reboot = new RebootQmaticHub();
+			reboot.setHubName(getName());
+			reboot.setURL(URL);
+			reboot.execute();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

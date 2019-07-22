@@ -1,4 +1,4 @@
-package com.adapt.rest;
+package com.adapt.http;
 
 import java.io.IOException;
 import java.security.cert.CertificateException;
@@ -21,11 +21,28 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * 2019 Adapt Middle East LLC. Dubai UAE.
+ * 
+ * @author Akhil Jayakumar
+ * @version 1.0
+ * @since 2019-07-17
+ * 
+ *        Qmatic Hub Using SSL Certificate in its server. Making http request
+ *        from java is throwing a handshake error. to bypass this issue, we are
+ *        building a custom okHttpObject.
+ */
 public class OkhttpUnsafe {
 	// Variable to store cookie after login
+	/*
+	 * Hub Using authentication and once authenticated it using a session cookie for
+	 * next request. like old http authentication.we are using this variable to
+	 * store cookie info
+	 */
 	private static String cookie = null;
-	private static final Logger logger = LoggerFactory.getLogger(POSTCall.class);
+	private static final Logger logger = LoggerFactory.getLogger(OkhttpUnsafe.class);
 
+	// gettes and setters
 	public static void setCookie(String cookie) {
 		OkhttpUnsafe.cookie = cookie;
 	}
@@ -34,19 +51,32 @@ public class OkhttpUnsafe {
 		return OkhttpUnsafe.cookie;
 	}
 
+	/*
+	 * a map to store cookies for corresponding hubs.it will work like a cache.
+	 */
 	private static Map<String, OkHttpClient> OkHttpClientCache = new HashMap<String, OkHttpClient>();
 
+	/*
+	 * add cookie to cache
+	 */
 	public static void addOkHttpClientToCache(String key, OkHttpClient value) {
 		OkHttpClientCache.put(key, value);
-		logger.info("HttpClient added to cache:"+"HUB :-"+key);
+		logger.info("HttpClient added to cache:" + "HUB :-" + key);
 	}
 
+	/*
+	 * Retrieve cookie
+	 */
 	public static OkHttpClient getOkHttpClientFromCache(String key) {
-		logger.info("HttpClient retrived from cache:"+"HUB :-"+key);
+		logger.info("HttpClient retrived from cache:" + "HUB :-" + key);
 		return OkHttpClientCache.get(key);
 	}
+
+	/*
+	 * remove cookie from cache.
+	 */
 	public static OkHttpClient removeOkHttpClientFromCache(String key) {
-		logger.info("HttpClient removed from cache:"+"HUB :-"+key);
+		logger.info("HttpClient removed from cache:" + "HUB :-" + key);
 		return OkHttpClientCache.remove(key);
 	}
 
@@ -107,7 +137,7 @@ public class OkhttpUnsafe {
 			});
 
 			OkHttpClient okHttpClient = builder.build();
-			if(getCookie()!=null) {
+			if (getCookie() != null) {
 				addOkHttpClientToCache(hubName, okHttpClient);
 				return getOkHttpClientFromCache(hubName);
 			}

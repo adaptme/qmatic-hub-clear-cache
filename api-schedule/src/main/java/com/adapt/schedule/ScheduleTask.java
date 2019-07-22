@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.adapt.workers.HubWorker;
+import com.adapt.workers.HubThreadsOrchestration;
 
 @Component
 public class ScheduleTask {
+	
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleTask.class);
 	@Value("#{'${hub.ip}'.split(',')}")
 	private String[] hubIP;
@@ -18,12 +19,12 @@ public class ScheduleTask {
 
 	@Scheduled(cron = "${cron.expression}")
 	public void reportCurrentTime() {
+		
 		for (String ip : hubIP) {
-			HubWorker hubWorker = new HubWorker(ip,reboot);
+			HubThreadsOrchestration hubWorker = new HubThreadsOrchestration(ip,reboot);
 			hubWorker.setName(ip);
 			hubWorker.start();
 		}
-		
 		
 	}
 }

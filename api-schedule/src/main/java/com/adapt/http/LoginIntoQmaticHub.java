@@ -1,4 +1,4 @@
-package com.adapt.rest;
+package com.adapt.http;
 
 import java.io.IOException;
 
@@ -11,12 +11,29 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class POSTCall implements RESTRequest {
-	private final Logger logger = LoggerFactory.getLogger(POSTCall.class);
-
+/**
+ * 2019 Adapt Middle East LLC. Dubai UAE.
+ * 
+ * @author Akhil Jayakumar
+ * @version 1.0
+ * @since 2019-07-17
+ * 
+ *        Class using to Login to Qmatic Hub with HTTP Post Request. This class
+ *        will login with default username and password InstallAdmin and ulan
+ *        and store the cookie to cache.
+ */
+public class LoginIntoQmaticHub implements RESTRequest {
+	private final Logger logger = LoggerFactory.getLogger(LoginIntoQmaticHub.class);
+	/*
+	 * Hub Login URL
+	 */
 	private String URL;
+	/*
+	 * Hub IP address
+	 */
 	private String hubName;
 
+//setters and getters
 	public String getHubName() {
 		return hubName;
 	}
@@ -51,7 +68,6 @@ public class POSTCall implements RESTRequest {
 			}
 		}
 		response.close();
-		
 
 	}
 

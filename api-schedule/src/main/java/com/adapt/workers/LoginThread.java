@@ -2,12 +2,12 @@ package com.adapt.workers;
 
 import java.io.IOException;
 
-import com.adapt.rest.POSTCall;
+import com.adapt.http.LoginIntoQmaticHub;
 
-public class LoginWorker extends Thread {
+public class LoginThread extends Thread {
 	private String URL;
 
-	public LoginWorker(String URL,String threadName) {
+	public LoginThread(String URL,String threadName) {
 		this.URL = URL;
 		this.setName(threadName);
 	}
@@ -15,7 +15,7 @@ public class LoginWorker extends Thread {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		POSTCall login = new POSTCall();
+		LoginIntoQmaticHub login = new LoginIntoQmaticHub();
 		login.setHubName(getName());
 		login.setURL(URL);
 		try {
