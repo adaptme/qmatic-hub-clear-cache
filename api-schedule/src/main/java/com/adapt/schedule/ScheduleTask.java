@@ -18,7 +18,7 @@ public class ScheduleTask {
 	private boolean reboot;
 
 	@Scheduled(cron = "${cron.expression}")
-	public void reportCurrentTime() {
+	public void clearQHubCache() {
 		
 		for (String ip : hubIP) {
 			HubThreadsOrchestration hubWorker = new HubThreadsOrchestration(ip,reboot);
