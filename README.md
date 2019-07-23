@@ -1,8 +1,5 @@
 # qmatic-hub-clear-cache
- For Hub with AME Video Streaming
-#### why?
-Once we start the IP TV Streaming on Qmatic Media Hub. Hub will keep all the media streams into its local cache.This is a default behaviour with qmatic branch hub and cinematic. Hub cant identify weather the played video is from live stream or static files. for streaming we are using a widget wihth Video js. So we have to periodically clear the branch hub cache.
-
+ 
 #### Installing as windows Service.
 To install as windows Service we need 3 compontnts.
 
